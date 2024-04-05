@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multipage Form</title>
+    <link rel="stylesheet" href="pihastyle.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Form page 1 -->
+        <div class="form-page" id="page1">
+            <h2>Select Your Dates</h2>
+            <section id="dates">
+                <br>
+                <h3>Select Your Dates</h3>
+                <label for="visitDate">Check-in Date:</label>
+                <input type="date" id="visitDate">
+                <label for="checkOutDate">Check-out Date:</label>
+                <input type="date" id="checkOutDate">
+            </section>
+            <div class="guestcategory">
+                <label for="Adult">Adult:</label>
+                <div class="input-container">
+                    <input type="number" id="Adult" min="0" value="0">
+                    <button class="increment">+</button>
+                    <button class="decrement">-</button>
+                </div>
+            </div>
+            <div class="guestcategory">
+                <label for="Child">Child:</label>
+                <div class="input-container">
+                    <input type="number" id="Child" min="0" value="0">
+                    <button class="increment">+</button>
+                    <button class="decrement">-</button>
+                </div>
+            </div>
+            <section id="guests">
+                <h2>Room Reservation</h2>
+                <br>
+                <div class="category">
+                    <label for="sinRoom">Single room:</label>
+                    <div class="input-container">
+                        <input type="number" id="single" min="0" value="0">
+                        <button class="increment">+</button>
+                        <button class="decrement">-</button>
+                    </div>
+                </div>
+                <div class="category">
+                    <label for="douRoom">Double room:</label>
+                    <div class="input-container">
+                        <input type="number" id="double" min="0" value="0">
+                        <button class="increment">+</button>
+                        <button class="decrement">-</button>
+                    </div>
+                </div>
+                <div class="category">
+                    <label for="triRoom">Triple room:</label>
+                    <div class="input-container">
+                        <input type="number" id="triple" min="0" value="0">
+                        <button class="increment">+</button>
+                        <button class="decrement">-</button>
+                    </div>
+                </div>
+            </section>
+            <button type="button" id="continueButton1">Next</button>
+        </div>
+    </div>
+
+
+        <!-- Form page 2 -->
+        <div class="form-page" id="page2" style="display: none;">
+            <h2>Enter Guest Details</h2>
+            <section class="details-section">
+                <h2>Enter your details</h2>
+                <form id="details-form">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" maxlength="50" placeholder="Christopher Nolan" required>
+                    <label for="mobileNumber">Mobile Number:</label>
+                    <div class="mobile-number-input">
+                        <input type="tel" id="mobileNumber" name="mobileNumber" maxlength="15" placeholder="123456789" required>
+                    </div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="chrisnolan@gmail.com" required>
+                    <label for="confirmEmail">Confirm Email:</label>
+                    <input type="email" id="confirmEmail" name="confirmEmail" required>
+                    <label for="gender">Gender:</label>
+                    <select id="gender" name="gender" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </form>
+            </section>
+            <button type="button" id="prevButton">Previous</button>
+            <button type="button" id="continueButton2">Next</button>
+        </div>
+
+        <!-- Form page 3 -->
+        <div class="form-page" id="page3" style="display: none;">
+            <h2>Payment Details</h2>
+            <section class="payment-section">
+                <h2>Payment details</h2>
+                <form id="payment-form">
+                    <label for="cardNumber">Card Number:</label>
+                    <input type="text" id="cardNumber" name="cardNumber" required placeholder="1234-1234-134-1234">
+                    <label for="expiryDate">Expiry Date:</label>
+                    <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+                    <label for="cvc">CVC / CVV:</label>
+                    <input type="text" id="cvc" name="cvc" required maxlength="3" placeholder="343">
+                    <label for="nameOnCard">Name on Card:</label>
+                    <input type="text" id="nameOnCard" name="nameOnCard" required placeholder="John Doe" maxlength="50">
+                   
+                </form>
+            </section>
+            <button type="button" id="prevButton2">Previous</button>
+            <button type="button" id="continueButton3">Next</button>
+        </div>
+    </div>
+
+    <script src="pihascript.js"></script>
+    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Inputmask plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
+
+    <script>
+        let currentPage = 1;
+        const pages = document.querySelectorAll('.form-page');
+
+        function nextPage() {
+            if (currentPage < pages.length) {
+                pages[currentPage - 1].style.display = 'none';
+                pages[currentPage].style.display = 'block';
+                currentPage++;
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                pages[currentPage - 1].style.display = 'none';
+                pages[currentPage - 2].style.display = 'block';
+                currentPage--;
+            }
+        }
+
+        function redirectToCheckout() {
+        window.open("pihacheckout.html", "_blank");
+}
+
+        // Add event listeners for "Next" and "Previous" buttons
+        document.getElementById("continueButton1").addEventListener("click", nextPage);
+        document.getElementById("prevButton").addEventListener("click", prevPage);
+        document.getElementById("continueButton2").addEventListener("click", nextPage);
+        document.getElementById("prevButton2").addEventListener("click", prevPage);
+        document.getElementById("continueButton3").addEventListener("click",redirectToCheckout );
+    </script>
+</body>
+</html>
